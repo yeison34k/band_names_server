@@ -22,6 +22,10 @@
         socket.emit('mensaje', {
             nombre: "Homa soy yeison"
         })
+
+        socket.on('mensaje', (payload)=> {
+            console.log("Listen", payload);
+        })
     </script>
 </body>
 </html>
