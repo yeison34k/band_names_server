@@ -18,7 +18,6 @@ bands.addBand(new Band("The Script"))
 
 
 io.on('connection', client => {
-    
     client.on('disconnect', () => { 
         console.log("cliente desconectado")
     });
@@ -36,6 +35,5 @@ io.on('connection', client => {
         client.emit("active-bands", bands.getBands());
     });
 
-    
     client.emit("active-bands", bands.getBands());
 });
