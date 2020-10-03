@@ -31,5 +31,11 @@ io.on('connection', client => {
         client.broadcast.emit("nuevo-mensaje", payload)
     });
 
+    client.on('vote-band', (payload) => {
+        bands.voteBand(payload);
+        client.emit("active-bands", bands.getBands());
+    });
+
+    
     client.emit("active-bands", bands.getBands());
 });
