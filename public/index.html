@@ -23,9 +23,18 @@
             nombre: "Homa soy yeison"
         })
 
-        socket.on('mensaje', (payload)=> {
+        socket.on('mensaje', function(payload) {
             console.log("Listen", payload);
         })
+
+        socket.on('nuevo-mensaje', function(payload)  {
+            console.log("escuchando", payload);
+        });
+
+
+        socket.on('active-bands', function(payload)  {
+            console.table(payload);
+        });
     </script>
 </body>
 </html>
