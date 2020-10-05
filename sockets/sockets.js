@@ -30,10 +30,23 @@ io.on('connection', client => {
         client.broadcast.emit("nuevo-mensaje", payload)
     });
 
+
+
+    //SEND DATA CLIENT
+    client.emit("active-bands", bands.getBands());
+
+    //GET DATA CLIENT
     client.on('vote-band', (payload) => {
         bands.voteBand(payload);
         client.emit("active-bands", bands.getBands());
     });
 
-    client.emit("active-bands", bands.getBands());
+    client.on('add-band', (payload) => {
+        bands.addBand(new Band(payload.name));
+        client.emit("active-bands", bands.getBands());
+    });
+
+    
+
+    
 });
