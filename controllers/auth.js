@@ -2,8 +2,6 @@
 const bcrypt = require('bcryptjs')
 const { response } = require('express')
 const generate = require('../jwt/jwt')
-
-
 const User = require('../models/user')
 
 async function newUser(req, res = response) {
@@ -20,11 +18,10 @@ async function newUser(req, res = response) {
 
         let user  = User(req.body)
         
-        //emcryp password
-        let salt = bcrypt.genSaltSync()
-        user.password = bcrypt.hashSync(password, salt)
+        let salt = bcrypt.genSaltSync() //emcryp password
+        user.password = bcrypt.hashSync(password, salt) //emcryp password
 
-        await user.save(); //save user in data base
+        await user.save() //save user in data base
 
         let token = await generate(user.id) //generate JWT
 
@@ -62,7 +59,6 @@ async function login(req, res = response) {
             })
         }
 
-
         let token = await generate(userDB.id) //generate JWT
 
         res.json({
@@ -83,7 +79,21 @@ async function login(req, res = response) {
     
 }
 
+async function newToken(req, res = response) {
+    let uid = req.uid
+    let token = await generate(uid)
+    let user = await User.findById(uid)
+
+    res.json({
+        ok: true,
+        token,
+        user,
+        msg: "New token generate!!"
+    })
+}
+
 module.exports = {
     newUser, 
-    login
+    login,
+    newToken
 }
