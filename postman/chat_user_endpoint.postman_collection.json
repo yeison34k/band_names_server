@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "eeca3656-9d1e-4f80-9a4f-58100e5277d2",
+		"name": "flutter_user_endpoint",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "newuser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"yeison\",\r\n    \"email\": \"yeison4@gmail.com\",\r\n    \"password\": \"q1w32eerr\"\r\n}  ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/api/login/new",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"api",
+						"login",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"yeison4@gmail.com\",\r\n    \"password\": \"q1w32eerr\"\r\n}  ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/api/login",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
