@@ -6,111 +6,230 @@
 	},
 	"item": [
 		{
-			"name": "newuser",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"yeison\",\r\n    \"email\": \"yeison4@gmail.com\",\r\n    \"password\": \"q1w32eerr\"\r\n}  ",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{local}}/api/login/new",
-					"host": [
-						"{{local}}"
-					],
-					"path": [
-						"api",
-						"login",
-						"new"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "login",
-			"event": [
+			"name": "local",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "8fc16c68-7c72-496b-8c62-e51674001d61",
-						"exec": [
-							"var jsonData = pm.response.json();\r",
-							"pm.environment.set(\"token\", jsonData.token);\r",
-							""
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8fc16c68-7c72-496b-8c62-e51674001d61",
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"token\", jsonData.token);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"yeison4@gmail.com\",\r\n    \"password\": \"q1w32eerr\"\r\n}  ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/login",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "newuser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"yeison\",\r\n    \"email\": \"yeison4@gmail.com\",\r\n    \"password\": \"q1w32eerr\"\r\n}  ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/login/new",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"login",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User new token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8b5f54f-ab34-4265-be72-9b393d0242d1",
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "{{token}}",
+								"type": "text"
+							}
 						],
-						"type": "text/javascript"
-					}
+						"url": {
+							"raw": "{{local}}/api/login/newToken",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"login",
+								"newToken"
+							]
+						}
+					},
+					"response": []
 				}
 			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"yeison4@gmail.com\",\r\n    \"password\": \"q1w32eerr\"\r\n}  ",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{local}}/api/login",
-					"host": [
-						"{{local}}"
-					],
-					"path": [
-						"api",
-						"login"
-					]
-				}
-			},
-			"response": []
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "User new token",
-			"event": [
+			"name": "develop",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "a8b5f54f-ab34-4265-be72-9b393d0242d1",
-						"exec": [
-							"var jsonData = pm.response.json();\r",
-							"pm.environment.set(\"token\", jsonData.token);"
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c2a55a6a-df2a-420b-8452-57cd33fe6048",
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"token\", jsonData.token);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"yeison4@gmail.com\",\r\n    \"password\": \"q1w32eerr\"\r\n}  ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev}}/api/login",
+							"host": [
+								"{{dev}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "newuser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"yeison\",\r\n    \"email\": \"yeison4@gmail.com\",\r\n    \"password\": \"q1w32eerr\"\r\n}  ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev}}/api/login/new",
+							"host": [
+								"{{dev}}"
+							],
+							"path": [
+								"api",
+								"login",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User new token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0ea80294-48b4-4c4c-a105-4e7f6d054338",
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "{{token}}",
+								"type": "text"
+							}
 						],
-						"type": "text/javascript"
-					}
+						"url": {
+							"raw": "{{dev}}/api/login/newToken",
+							"host": [
+								"{{dev}}"
+							],
+							"path": [
+								"api",
+								"login",
+								"newToken"
+							]
+						}
+					},
+					"response": []
 				}
 			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "x-token",
-						"value": "{{token}}",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{local}}/api/login/newToken",
-					"host": [
-						"{{local}}"
-					],
-					"path": [
-						"api",
-						"login",
-						"newToken"
-					]
-				}
-			},
-			"response": []
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -137,7 +256,7 @@
 	],
 	"variable": [
 		{
-			"id": "356b0b03-7447-4525-9bb5-d7bbb989b022",
+			"id": "8f259af4-a8c1-4c8d-92fb-94ebeddd9285",
 			"key": "token",
 			"value": ""
 		}
