@@ -43,15 +43,15 @@ async function newUser(req, res = response) {
 async function login(req, res = response) {
     let { email, password } = req.body;
     try {
-        let userDB = await User.findOne({ email })
-        if (!userDB) {
+        let user = await User.findOne({ email })
+        if (!user) {
             return res.status(404).json({
                 ok: false,
                 msg: 'User not exists!'
             })        
         }
 
-        const verified = bcrypt.compareSync(password, userDB.password )
+        const verified = bcrypt.compareSync(password, user.password )
         if (!verified) {
             return res.status(400).json({
                 ok: false,
@@ -59,12 +59,12 @@ async function login(req, res = response) {
             })
         }
 
-        let token = await generate(userDB.id) //generate JWT
+        let token = await generate(user.id) //generate JWT
 
         res.json({
             ok: true,
             msg: 'Start application!!!',
-            userDB,
+            user,
             token
         })
 
