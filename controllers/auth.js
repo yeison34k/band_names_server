@@ -1,7 +1,7 @@
 'use strict'
 const bcrypt = require('bcryptjs')
 const { response } = require('express')
-const generate = require('../jwt/jwt')
+const { generate } = require('../jwt/jwt')
 const User = require('../models/user')
 
 async function newUser(req, res = response) {

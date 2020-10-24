@@ -1,10 +1,11 @@
 'use strict'
 
-const { io } = require('../index');
+const { io } = require('../index')
 
-const Band = require('../models/band');
-const Bands = require('../models/bands');
-
+const Band = require('../models/band')
+const Bands = require('../models/bands')
+const { validateToken } = require('../jwt/jwt')
+const {userConnect, userDesconnect } = require('../controllers/socket')
 
 const bands = new Bands();
 
@@ -16,7 +17,7 @@ bands.addBand(new Band("Kings of Leon"))
 bands.addBand(new Band("Alice in Chains"))
 bands.addBand(new Band("The Script"))
 
-
+/*
 io.on('connection', client => {
     client.on('disconnect', () => { 
         console.log("cliente desconectado")
@@ -30,8 +31,6 @@ io.on('connection', client => {
         client.broadcast.emit("nuevo-mensaje", payload)
     });
 
-
-
     //SEND DATA CLIENT
     client.emit("active-bands", bands.getBands());
 
@@ -44,9 +43,18 @@ io.on('connection', client => {
     client.on('add-band', (payload) => {
         bands.addBand(new Band(payload.name));
         client.emit("active-bands", bands.getBands());
+    }); 
+});*/
+
+io.on('connection', client => {
+    let [valid, uid] = validateToken(client.handshake.headers['x-token']);
+
+    if(!valid) {return client.disconnect(); }  //Valid authenticated
+
+    userConnect(uid);
+
+    client.on('disconnect', () => { 
+        userDesconnect(uid)
     });
 
-    
-
-    
 });

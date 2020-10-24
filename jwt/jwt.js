@@ -17,4 +17,16 @@ const generate = (uid) => {
     })
 }
 
-module.exports = generate
+const validateToken = (token='') => {
+    try {
+        let { uid } = jwt.verify(token, process.env.JWT_TOKEN)
+        return [true, uid]     
+    } catch (error) {
+        return [false, null]
+    }
+}
+
+module.exports = {
+    generate,
+    validateToken
+ }
