@@ -51,8 +51,15 @@ io.on('connection', client => {
 
     if(!valid) {return client.disconnect(); }  //Valid authenticated
 
-    userConnect(uid);
+    userConnect(uid)
 
+    client.join(uid)
+
+    //listen client messages
+    client.on('personal-message', (payload) => { 
+        io.to(payload.to).emit('personal-message', payload)
+    })
+    
     client.on('disconnect', () => { 
         userDesconnect(uid)
     });
