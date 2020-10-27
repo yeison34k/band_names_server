@@ -5,7 +5,7 @@ const { io } = require('../index')
 const Band = require('../models/band')
 const Bands = require('../models/bands')
 const { validateToken } = require('../jwt/jwt')
-const {userConnect, userDesconnect } = require('../controllers/socket')
+const {userConnect, userDesconnect, saveMessage } = require('../controllers/socket')
 
 const bands = new Bands();
 
@@ -56,7 +56,8 @@ io.on('connection', client => {
     client.join(uid)
 
     //listen client messages
-    client.on('personal-message', (payload) => { 
+    client.on('personal-message', async (payload) => { 
+        await saveMessage(payload)
         io.to(payload.to).emit('personal-message', payload)
     })
     

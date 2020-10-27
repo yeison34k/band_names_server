@@ -17,6 +17,7 @@ app.use(express.static(publicPath))
 //my routes
 app.use('/api/login', require('./routes/auth'))
 app.use('/api/user', require('./routes/users'))
+app.use('/api/chat', require('./routes/chat'))
 
 server.listen(process.env.PORT, (err) => {
     if (err) throw new Error();
